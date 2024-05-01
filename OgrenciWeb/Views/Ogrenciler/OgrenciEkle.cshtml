@@ -1,0 +1,36 @@
+﻿@model OgrenciWeb.Models.EntityFramework.TBLOgrenciler
+
+
+@{
+    ViewBag.Title = "OgrenciEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div>
+        <label>Öğrenci Adı</label>
+        <input type="text" class="form-control" name="OgrAd" />
+        @Html.ValidationMessageFor(x => x.OgrAd, "Öğrenci adı girilmesi zorunludur.", new { @class = "text-danger" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Öğrenci Soyadı</label>
+        <input type="text" class="form-control" name="OgrSoyad" />
+        @Html.ValidationMessageFor(x => x.OgrSoyad, "Öğrenci soyadı girilmesi zorunludur.", new { @class = "text-danger" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Öğrenci Cinsiyeti:</label>
+        @Html.DropDownListFor(x => x.OgrCinsiyet, (List<SelectListItem>)ViewBag.cinsiyetler, new { @class = "form-control" })
+        @*@Html.DropDownList("cinsiyetler", null, new { @class = "form-control" })*@
+    </div>
+    <div  style="margin-top:15px">
+        <label>Öğrenci Kulübü</label>
+        @Html.DropDownListFor(x => x.TBLKulupler.KulupID, (List<SelectListItem>)ViewBag.kulupler, new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.TBLKulupler.KulupAd, "", new { @class = "text-danger" })*@
+    </div>
+
+    <div style="margin-top:15px">
+        <button class="btn btn-success">Ekle</button>
+        <a href="/Ogrenciler/Index" class="btn btn-warning">İptal</a>
+    </div>
+</form>
+

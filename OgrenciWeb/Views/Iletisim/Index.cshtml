@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="~/Temalar/Template/css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+
+</head>
+<body>
+    <div class="col-md-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="bg-light my-2 p-3 pt-2">
+            <form action="https://formspree.io/your@email.com" method="POST">
+                <div class="form-group my-2">
+                    <label for="name" class="form-label fw-bolder">Name</label>
+                    <input class="form-control" type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group my-2">
+                    <label for="email" class="form-label fw-bolder">Email</label>
+                    <input class="form-control" type="email" id="email" name="_replyto" required>
+                </div>
+                <div class="form-group my-2">
+                    <label for="message" class="form-label fw-bolder">Message</label>
+                    <textarea class="form-control" style="resize: none;" id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button class="btn btn-primary mt-2" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <footer class="pt-5 pb-5 text-center bg-light">
+            <div class="my-3">
+                <div class="h4">Yusuf Öcal</div>
+                <p>Student & Web Developer</p>
+                <div class="social-nav">
+                    <nav role="navigation">
+                        <ul class="nav justify-content-center">
+                            <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/yusuf-ocal" title="LinkedIn" ><i class="fab fa-linkedin" style="font-size: 30px;"></i><span class="menu-title sr-only">LinkedIn</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://github.com/YusufOcal" title="GitHub"><i class="fab fa-github" style="font-size: 30px;"></i><span class="menu-title sr-only">GitHub</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+

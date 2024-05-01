@@ -1,0 +1,44 @@
+﻿@model OgrenciWeb.Models.EntityFramework.TBLNotlar
+
+
+@{
+    ViewBag.Title = "NotEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div>
+        <label>Ders Adı</label>
+        @Html.DropDownListFor(x => x.TBLDersler.DersID, (List<SelectListItem>)ViewBag.dersler, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Öğrenci Ad-Soyad</label>
+        @Html.DropDownListFor(x => x.TBLOgrenciler.OgrenciID, (List<SelectListItem>)ViewBag.ogrenciler, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Sinav 1</label>
+        <input type="number" class="form-control" name="Sinav1" />
+        @Html.ValidationMessageFor(x => x.Sinav1, "100'den büyük not giremezsin", new {@class = "text-danger"}) 
+    </div>
+    <div>
+        <label>Sınav 2</label>
+        <input type="number" class="form-control" name="Sinav2" />
+        @Html.ValidationMessageFor(x => x.Sinav2, "100'den büyük not giremezsin", new { @class = "text-danger" })
+    </div>
+    <div>
+        <label>Sınav 3</label>
+        <input type="number" class="form-control" name="Sinav3" />
+        @Html.ValidationMessageFor(x => x.Sinav3, "100'den büyük not giremezsin", new { @class = "text-danger" })
+    </div>
+    <div>
+        <label>Proje Notu</label>
+        <input type="number" class="form-control" name="Proje" />
+        @Html.ValidationMessageFor(x => x.Proje, "100'den büyük not giremezsin", new { @class = "text-danger" })
+    </div>
+
+    <div style="margin-top:15px">
+        <button class="btn btn-success">Ekle</button>
+        <a href="/Notlar/Index" class="btn btn-warning">İptal</a>
+    </div>
+</form>
+

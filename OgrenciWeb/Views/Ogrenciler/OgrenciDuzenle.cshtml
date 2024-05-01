@@ -1,0 +1,37 @@
+﻿@model OgrenciWeb.Models.EntityFramework.TBLOgrenciler
+
+@{
+    ViewBag.Title = "OgrenciDuzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("OgrenciDuzenle", "Ogrenciler", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.OgrenciID)
+    <div>
+        <label>Ögrenci Adı</label>
+        @Html.TextBoxFor(x => x.OgrAd, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.OgrAd, "Öğrenci adı girilmesi zorunludur.", new { @class = "text-danger" })
+
+    </div>
+    <div>
+        <label>Öğrenci Soyadı</label>
+        @Html.TextBoxFor(x => x.OgrSoyad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.OgrSoyad, "Öğrenci soyadı girilmesi zorunludur.", new { @class = "text-danger" })
+
+    </div>
+    <div>
+        <label>Öğrenci Cinsiyet</label>
+        @Html.DropDownListFor(x => x.OgrCinsiyet, (List<SelectListItem>)ViewBag.cinsiyetler, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Öğrenci Kulüp</label>
+        @Html.DropDownListFor(x => x.OgrKulup, ViewBag.kulupler as List<SelectListItem>, new { @class = "form-control" })
+    </div>
+
+    <div style="margin-top:15px">
+        <button class="btn btn-success">Düzenle</button>
+        <a href="/Ogrenciler/Index" class="btn btn-warning">İptal</a>
+    </div>
+}
+

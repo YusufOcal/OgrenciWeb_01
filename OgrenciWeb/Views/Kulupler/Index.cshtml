@@ -1,0 +1,35 @@
+﻿@using OgrenciWeb.Models.EntityFramework
+@model List<TBLKulupler>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/CSS/style.css">
+</head>
+
+<table class="table table-bordered">
+    <tr>
+        <th class="sutun-ortalama">#</th>
+        <th class="sutun-ortalama">Kulüp Adı</th>
+        <th class="sutun-ortalama">Kulüp Kontenjanı</th>
+        <th class="sutun-ortalama">Sil</th>
+        <th class="sutun-ortalama">Düzenle</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="sutun-ortalama">@item.KulupID</td>
+                <td class="sutun-ortalama">@item.KulupAd</td>
+                <td class="sutun-ortalama">@item.KulupKontenjan</td>
+                <td class="sutun-ortalama"><a href="/Kulupler/KulupSil/@item.KulupID" class="btn btn-danger">Sil</a></td>
+                <td class="sutun-ortalama"><a href="/Kulupler/KulupDuzenle/@item.KulupID" class="btn btn-warning">Düzenle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Kulupler/KulupEkle" class="btn btn-primary">Kulüp Ekle</a>
+

@@ -1,0 +1,51 @@
+﻿@using OgrenciWeb.Models.EntityFramework
+@model List<TBLNotlar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <td>#</td>
+        <th>Ders Adı</th>
+        <th>Oğrenci Ad-Soyad</th>
+        <th>Sınav-1</th>
+        <th>Sınav-2</th>
+        <th>Sınav-3</th>
+        <th>Proje Notu</th>
+        <th>Ortalama</th>
+        <th>Durum Bilgisi</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NotID</td>
+                <td>@item.TBLDersler.DersAd</td>
+                <td>@(item.TBLOgrenciler.OgrAd + " " + item.TBLOgrenciler.OgrSoyad)</td>
+                <td>@item.Sinav1</td>
+                <td>@item.Sinav2</td>
+                <td>@item.Sinav3</td>
+                <td>@item.Proje</td>
+                <td>@item.Ortalama</td>
+                <td>
+                    @if (item.Durum == false)
+                    {
+                        <text>Kaldı</text>
+                    }
+                    else
+                    {
+                        <text>Geçti</text>
+                    }
+                </td>
+                <td><a href="/Notlar/NotSil/@item.NotID" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Notlar/NotDuzenle/@item.NotID" class="btn btn-warning">Düzenle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Notlar/NotEkle" class="btn btn-primary">Not Ekle</a>

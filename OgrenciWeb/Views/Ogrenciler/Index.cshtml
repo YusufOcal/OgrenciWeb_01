@@ -1,0 +1,40 @@
+﻿@using OgrenciWeb.Models.EntityFramework
+@model List<TBLOgrenciler>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/CSS/style.css">
+</head>
+
+<table class="table table-bordered">
+    <tr>
+        <td>#</td>
+        <th class="sutun-ortala">Oğrenci Foto</th>
+        <th class="sutun-ortala">Oğrenci Ad</th>
+        <th class="sutun-ortala">Oğrenci Soyad</th>
+        <th class="sutun-ortala">Oğrenci Cinsiyet</th>
+        <th class="sutun-ortala">Oğrenci Kulüp Adı</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OgrenciID</td>
+                <td style="text-align:center"><img src="@item.OgrFotograf" width="40" height="40" /></td>
+                <td>@item.OgrAd</td>
+                <td>@item.OgrSoyad</td>
+                <td>@item.OgrCinsiyet</td>
+                <td>@item.TBLKulupler.KulupAd</td>
+                <td><a href="/Ogrenciler/OgrenciSil/@item.OgrenciID" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Ogrenciler/OgrenciDuzenle/@item.OgrenciID" class="btn btn-warning">Düzenle</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Ogrenciler/OgrenciEkle" class="btn btn-primary">Öğrenci Ekle</a>

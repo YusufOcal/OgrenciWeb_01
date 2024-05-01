@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "KulupEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-group" method="post">
+    <div>
+        <label>Kulüp Adı</label>
+        <input type="text" class="form-control" name="KulupAd" />
+    </div>
+    <div>
+        <label>Kulüp Kontenjan</label>
+        <input type="number" class="form-control" name="KulupKontenjan" />
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-success">Ekle</button>
+        <a href="/Kulupler/Index" class="btn btn-warning">İptal</a>
+    </div>
+</form>
+

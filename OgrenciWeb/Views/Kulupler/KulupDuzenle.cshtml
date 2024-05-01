@@ -1,0 +1,32 @@
+﻿@model OgrenciWeb.Models.EntityFramework.TBLKulupler
+
+@{
+    ViewBag.Title = "KulupDuzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("KulupDuzenle", "Kulupler", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.KulupID)
+    <div>
+        <label>Kulüp Adı</label>
+
+        @*Input ile verileri çekemiyorsun sayın dostum benim*@
+        @*<input type="text" class="form-control" name="KulupAd" />*@ 
+
+        @Html.TextBoxFor(x => x.KulupAd, new {@class = "form-control"})
+    </div>
+    <div>
+        <label>Kulüp Kontenjan</label>
+
+        @*Input ile verileri çekemiyorsun sayın dostum benim*@
+        @*<input type="number" class="form-control" name="KulupKontenjan" />*@
+
+        @Html.TextBoxFor(x => x.KulupKontenjan, new {@class = "form-control"})
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-success">Düzenle</button>
+        <a href="/Kulupler/Index" class="btn btn-warning">İptal</a>
+    </div>
+}
+

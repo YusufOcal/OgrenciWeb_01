@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OkulMvcDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLDersler">
+          <Key>
+            <PropertyRef Name="DersID" />
+          </Key>
+          <Property Name="DersID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DersAd" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBLKulupler">
+          <Key>
+            <PropertyRef Name="KulupID" />
+          </Key>
+          <Property Name="KulupID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KulupAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="KulupKontenjan" Type="smallint" />
+        </EntityType>
+        <EntityType Name="TBLNotlar">
+          <Key>
+            <PropertyRef Name="NotID" />
+          </Key>
+          <Property Name="NotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DersID" Type="tinyint" />
+          <Property Name="OgrenciID" Type="int" />
+          <Property Name="Sinav1" Type="tinyint" />
+          <Property Name="Sinav2" Type="tinyint" />
+          <Property Name="Sinav3" Type="tinyint" />
+          <Property Name="Proje" Type="tinyint" />
+          <Property Name="Ortalama" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBLOgrenciler">
+          <Key>
+            <PropertyRef Name="OgrenciID" />
+          </Key>
+          <Property Name="OgrenciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OgrAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="OgrSoyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="OgrFotograf" Type="nvarchar" MaxLength="50" />
+          <Property Name="OgrCinsiyet" Type="nvarchar" MaxLength="50" />
+          <Property Name="OgrKulup" Type="tinyint" />
+        </EntityType>
+        <Association Name="FK_TBLNotlar_TBLDersler">
+          <End Role="TBLDersler" Type="Self.TBLDersler" Multiplicity="0..1" />
+          <End Role="TBLNotlar" Type="Self.TBLNotlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLDersler">
+              <PropertyRef Name="DersID" />
+            </Principal>
+            <Dependent Role="TBLNotlar">
+              <PropertyRef Name="DersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLNotlar_TBLOgrenciler">
+          <End Role="TBLOgrenciler" Type="Self.TBLOgrenciler" Multiplicity="0..1" />
+          <End Role="TBLNotlar" Type="Self.TBLNotlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLOgrenciler">
+              <PropertyRef Name="OgrenciID" />
+            </Principal>
+            <Dependent Role="TBLNotlar">
+              <PropertyRef Name="OgrenciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLOgrenciler_TBLKulupler">
+          <End Role="TBLKulupler" Type="Self.TBLKulupler" Multiplicity="0..1" />
+          <End Role="TBLOgrenciler" Type="Self.TBLOgrenciler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKulupler">
+              <PropertyRef Name="KulupID" />
+            </Principal>
+            <Dependent Role="TBLOgrenciler">
+              <PropertyRef Name="OgrKulup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OkulMvcDbModelStoreContainer">
+          <EntitySet Name="TBLDersler" EntityType="Self.TBLDersler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLKulupler" EntityType="Self.TBLKulupler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLNotlar" EntityType="Self.TBLNotlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLOgrenciler" EntityType="Self.TBLOgrenciler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBLNotlar_TBLDersler" Association="Self.FK_TBLNotlar_TBLDersler">
+            <End Role="TBLDersler" EntitySet="TBLDersler" />
+            <End Role="TBLNotlar" EntitySet="TBLNotlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLNotlar_TBLOgrenciler" Association="Self.FK_TBLNotlar_TBLOgrenciler">
+            <End Role="TBLOgrenciler" EntitySet="TBLOgrenciler" />
+            <End Role="TBLNotlar" EntitySet="TBLNotlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLOgrenciler_TBLKulupler" Association="Self.FK_TBLOgrenciler_TBLKulupler">
+            <End Role="TBLKulupler" EntitySet="TBLKulupler" />
+            <End Role="TBLOgrenciler" EntitySet="TBLOgrenciler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OkulMvcDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLDersler">
+          <Key>
+            <PropertyRef Name="DersID" />
+          </Key>
+          <Property Name="DersID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DersAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBLNotlar" Relationship="Self.FK_TBLNotlar_TBLDersler" FromRole="TBLDersler" ToRole="TBLNotlar" />
+        </EntityType>
+        <EntityType Name="TBLKulupler">
+          <Key>
+            <PropertyRef Name="KulupID" />
+          </Key>
+          <Property Name="KulupID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KulupAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KulupKontenjan" Type="Int16" />
+          <NavigationProperty Name="TBLOgrenciler" Relationship="Self.FK_TBLOgrenciler_TBLKulupler" FromRole="TBLKulupler" ToRole="TBLOgrenciler" />
+        </EntityType>
+        <EntityType Name="TBLNotlar">
+          <Key>
+            <PropertyRef Name="NotID" />
+          </Key>
+          <Property Name="NotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DersID" Type="Byte" />
+          <Property Name="OgrenciID" Type="Int32" />
+          <Property Name="Sinav1" Type="Byte" />
+          <Property Name="Sinav2" Type="Byte" />
+          <Property Name="Sinav3" Type="Byte" />
+          <Property Name="Proje" Type="Byte" />
+          <Property Name="Ortalama" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="TBLDersler" Relationship="Self.FK_TBLNotlar_TBLDersler" FromRole="TBLNotlar" ToRole="TBLDersler" />
+          <NavigationProperty Name="TBLOgrenciler" Relationship="Self.FK_TBLNotlar_TBLOgrenciler" FromRole="TBLNotlar" ToRole="TBLOgrenciler" />
+        </EntityType>
+        <EntityType Name="TBLOgrenciler">
+          <Key>
+            <PropertyRef Name="OgrenciID" />
+          </Key>
+          <Property Name="OgrenciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OgrAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OgrSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OgrFotograf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OgrCinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OgrKulup" Type="Byte" />
+          <NavigationProperty Name="TBLKulupler" Relationship="Self.FK_TBLOgrenciler_TBLKulupler" FromRole="TBLOgrenciler" ToRole="TBLKulupler" />
+          <NavigationProperty Name="TBLNotlar" Relationship="Self.FK_TBLNotlar_TBLOgrenciler" FromRole="TBLOgrenciler" ToRole="TBLNotlar" />
+        </EntityType>
+        <Association Name="FK_TBLNotlar_TBLDersler">
+          <End Role="TBLDersler" Type="Self.TBLDersler" Multiplicity="0..1" />
+          <End Role="TBLNotlar" Type="Self.TBLNotlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLDersler">
+              <PropertyRef Name="DersID" />
+            </Principal>
+            <Dependent Role="TBLNotlar">
+              <PropertyRef Name="DersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLOgrenciler_TBLKulupler">
+          <End Role="TBLKulupler" Type="Self.TBLKulupler" Multiplicity="0..1" />
+          <End Role="TBLOgrenciler" Type="Self.TBLOgrenciler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKulupler">
+              <PropertyRef Name="KulupID" />
+            </Principal>
+            <Dependent Role="TBLOgrenciler">
+              <PropertyRef Name="OgrKulup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLNotlar_TBLOgrenciler">
+          <End Role="TBLOgrenciler" Type="Self.TBLOgrenciler" Multiplicity="0..1" />
+          <End Role="TBLNotlar" Type="Self.TBLNotlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLOgrenciler">
+              <PropertyRef Name="OgrenciID" />
+            </Principal>
+            <Dependent Role="TBLNotlar">
+              <PropertyRef Name="OgrenciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OkulMvcDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLDersler" EntityType="Self.TBLDersler" />
+          <EntitySet Name="TBLKulupler" EntityType="Self.TBLKulupler" />
+          <EntitySet Name="TBLNotlar" EntityType="Self.TBLNotlar" />
+          <EntitySet Name="TBLOgrenciler" EntityType="Self.TBLOgrenciler" />
+          <AssociationSet Name="FK_TBLNotlar_TBLDersler" Association="Self.FK_TBLNotlar_TBLDersler">
+            <End Role="TBLDersler" EntitySet="TBLDersler" />
+            <End Role="TBLNotlar" EntitySet="TBLNotlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLOgrenciler_TBLKulupler" Association="Self.FK_TBLOgrenciler_TBLKulupler">
+            <End Role="TBLKulupler" EntitySet="TBLKulupler" />
+            <End Role="TBLOgrenciler" EntitySet="TBLOgrenciler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLNotlar_TBLOgrenciler" Association="Self.FK_TBLNotlar_TBLOgrenciler">
+            <End Role="TBLOgrenciler" EntitySet="TBLOgrenciler" />
+            <End Role="TBLNotlar" EntitySet="TBLNotlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OkulMvcDbModelStoreContainer" CdmEntityContainer="OkulMvcDbEntities">
+          <EntitySetMapping Name="TBLDersler">
+            <EntityTypeMapping TypeName="OkulMvcDbModel.TBLDersler">
+              <MappingFragment StoreEntitySet="TBLDersler">
+                <ScalarProperty Name="DersID" ColumnName="DersID" />
+                <ScalarProperty Name="DersAd" ColumnName="DersAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLKulupler">
+            <EntityTypeMapping TypeName="OkulMvcDbModel.TBLKulupler">
+              <MappingFragment StoreEntitySet="TBLKulupler">
+                <ScalarProperty Name="KulupID" ColumnName="KulupID" />
+                <ScalarProperty Name="KulupAd" ColumnName="KulupAd" />
+                <ScalarProperty Name="KulupKontenjan" ColumnName="KulupKontenjan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLNotlar">
+            <EntityTypeMapping TypeName="OkulMvcDbModel.TBLNotlar">
+              <MappingFragment StoreEntitySet="TBLNotlar">
+                <ScalarProperty Name="NotID" ColumnName="NotID" />
+                <ScalarProperty Name="DersID" ColumnName="DersID" />
+                <ScalarProperty Name="OgrenciID" ColumnName="OgrenciID" />
+                <ScalarProperty Name="Sinav1" ColumnName="Sinav1" />
+                <ScalarProperty Name="Sinav2" ColumnName="Sinav2" />
+                <ScalarProperty Name="Sinav3" ColumnName="Sinav3" />
+                <ScalarProperty Name="Proje" ColumnName="Proje" />
+                <ScalarProperty Name="Ortalama" ColumnName="Ortalama" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLOgrenciler">
+            <EntityTypeMapping TypeName="OkulMvcDbModel.TBLOgrenciler">
+              <MappingFragment StoreEntitySet="TBLOgrenciler">
+                <ScalarProperty Name="OgrenciID" ColumnName="OgrenciID" />
+                <ScalarProperty Name="OgrAd" ColumnName="OgrAd" />
+                <ScalarProperty Name="OgrSoyad" ColumnName="OgrSoyad" />
+                <ScalarProperty Name="OgrFotograf" ColumnName="OgrFotograf" />
+                <ScalarProperty Name="OgrCinsiyet" ColumnName="OgrCinsiyet" />
+                <ScalarProperty Name="OgrKulup" ColumnName="OgrKulup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
